@@ -1,3 +1,4 @@
+import 'package:apod_daydream_flutter/backdrop/backdrop_clock.dart';
 import 'package:apod_daydream_flutter/model/apod.dart';
 import 'package:apod_daydream_flutter/repo/apod_repo.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -12,11 +13,18 @@ class BackdropPage extends StatefulWidget {
 
 class _BackdropPageState extends State<BackdropPage> {
   ApodRepository apodRepository;
+  BackdropClock backdropClock;
 
   @override
   void initState() {
     super.initState();
     apodRepository = RestfulApodRepository();
+    backdropClock = BackdropClock();
+  }
+
+  @override
+  void dispose() {
+    backdropClock.close();
   }
 
   @override
@@ -88,11 +96,24 @@ class _BackdropPageState extends State<BackdropPage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
-                                  Text(
-                                    "11:00", // TODO - update clock every minute
-                                    style:
-                                        Theme.of(context).textTheme.headline1,
-                                  ),
+                                  StreamBuilder(
+                                      stream: backdropClock.minuteStream.stream,
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<String> snapshot) {
+                                        if (snapshot.hasData) {
+                                          return Text(
+                                            snapshot.data,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline1,
+                                          );
+                                        } else {
+                                          return Text("--:--",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline3);
+                                        }
+                                      }),
                                 ],
                               ),
                               Row(
