@@ -24,6 +24,7 @@ class _BackdropPageState extends State<BackdropPage> {
 
   @override
   void dispose() {
+    super.dispose();
     backdropClock.close();
   }
 
