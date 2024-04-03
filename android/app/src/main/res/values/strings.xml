@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">APOD Daydream</string>
+
+    <string name="dreamservice_package_context">com.android.systemui</string>
+    <string name="dreamservice_class_name">com.android.systemui.Somnambulator</string>
+</resources>

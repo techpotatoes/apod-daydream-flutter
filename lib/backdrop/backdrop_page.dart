@@ -1,19 +1,19 @@
-import 'package:apod_daydream_flutter/backdrop/backdrop_clock.dart';
-import 'package:apod_daydream_flutter/model/apod.dart';
-import 'package:apod_daydream_flutter/repo/apod_repo.dart';
+import 'package:apod_daydream/backdrop/backdrop_clock.dart';
+import 'package:apod_daydream/model/apod.dart';
+import 'package:apod_daydream/repo/apod_repo.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class BackdropPage extends StatefulWidget {
-  BackdropPage({Key key}) : super(key: key);
+  const BackdropPage({required Key key}) : super(key: key);
 
   @override
   _BackdropPageState createState() => _BackdropPageState();
 }
 
 class _BackdropPageState extends State<BackdropPage> {
-  ApodRepository apodRepository;
-  BackdropClock backdropClock;
+  late ApodRepository apodRepository;
+  late BackdropClock backdropClock;
 
   @override
   void initState() {
@@ -36,8 +36,8 @@ class _BackdropPageState extends State<BackdropPage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Stack(fit: StackFit.expand, children: <Widget>[
-            _apodImageWidget(snapshot.data.hdurl),
-            _apodInfoWidget(snapshot.data.title, snapshot.data.explanation),
+            _apodImageWidget(snapshot.data!.hdurl),
+            _apodInfoWidget(snapshot.data!.title, snapshot.data!.explanation),
           ]);
         } else
           return Stack(fit: StackFit.expand, children: <Widget>[
@@ -103,7 +103,7 @@ class _BackdropPageState extends State<BackdropPage> {
                                           AsyncSnapshot<String> snapshot) {
                                         if (snapshot.hasData) {
                                           return Text(
-                                            snapshot.data,
+                                            snapshot.data!,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline1,
@@ -149,6 +149,6 @@ class _BackdropPageState extends State<BackdropPage> {
 
   Image _temporaryImageWidget() {
     return Image(
-        fit: BoxFit.cover, image: AssetImage('resources/astronomy.jpg'));
+        fit: BoxFit.cover, image: AssetImage('assets/astronomy.jpg'));
   }
 }

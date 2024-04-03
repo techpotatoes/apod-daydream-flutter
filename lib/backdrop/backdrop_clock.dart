@@ -5,11 +5,10 @@ class BackdropClock {
   static const String HOUR_FORMAT = "HH";
   static const MINUTE_FORMAT = 'mm';
   
-  StreamController<String> minuteStream;
-  Timer _timer;
+  StreamController<String> minuteStream = StreamController<String>();
+  late Timer _timer;
 
   BackdropClock() {
-      minuteStream = StreamController<String>();
       _updateTime();
   }
 

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:apod_daydream_flutter/model/apod.dart';
-import 'package:apod_daydream_flutter/repo/apod_cache_manager.dart';
+import 'package:apod_daydream/model/apod.dart';
+import 'package:apod_daydream/repo/apod_cache_manager.dart';
 
 abstract class ApodRepository {
   Future<Apod> getApod();
